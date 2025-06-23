@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0e17">
+  <meta name="description" content="Secure bot pairing platform by ORMAN-XMD Development">
+  <meta name="keywords" content="pairing, Bot, security, Terrizev">
+  <meta property="og:title" content="ANONYMOUS-MD Pairing Platform">
+  <meta property="og:description" content="Secure Bot pairing system">
+  <meta property="og:image" content="https://files.catbox.moe/93taiv.jpg">
+  <meta property="og:url" content="https://yourdomain.com">
+  <link rel="icon" type="image/png" href="https://files.catbox.moe/93taiv.jpg">
+  <link rel="apple-touch-icon" href="https://files.catbox.moe/93taiv.jpg">
+  
+  <!-- Preload important resources -->
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+  <link rel="preload" href="https://nie.v.netease.com/nie/2021/0311/180bb6ea37a856240100f1adbcb86cf2qt.mp4" as="video" type="video/mp4">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #00f7ff;
+      --primary-dark: #00b4d8;
+      --secondary: #1e3a78;
+      --bg: #0a0e17;
+      --glass: rgba(255, 255, 255, 0.05);
+      --glass-hover: rgba(255, 255, 255, 0.1);
+      --text-light: rgba(255, 255, 255, 0.8);
+      --text-lighter: rgba(255, 255, 255, 0.6);
+      --border-radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: white;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      background: linear-gradient(45deg, var(--bg) 30%, rgba(10, 14, 23, 0.8));
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      mix-blend-mode: screen;
+      opacity: 0.15;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 2rem;
+      background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: textFloat 3s ease-in-out infinite;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      max-width: 600px;
+      text-align: center;
+      font-size: 1.1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s 0.3s forwards;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 900px;
+      margin: 2rem 0;
+    }
+
+    .btn {
+      padding: 1.25rem 1.5rem;
+      border: none;
+      border-radius: var(--border-radius);
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+    }
+
+    .btn:nth-child(1) { animation-delay: 0.4s; }
+    .btn:nth-child(2) { animation-delay: 0.5s; }
+    .btn:nth-child(3) { animation-delay: 0.6s; }
+    .btn:nth-child(4) { animation-delay: 0.7s; }
+
+    .btn:hover {
+      background: var(--glass-hover);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 247, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn:active {
+      transform: translateY(-2px);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .btn i {
+      font-size: 1.3em;
+      transition: var(--transition);
+    }
+
+    .btn:hover i {
+      transform: scale(1.1);
+    }
+
+    .status-indicator {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      background: var(--glass);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 2s infinite;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 1.5rem;
+      color: var(--text-lighter);
+      font-size: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: var(--text-lighter);
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    @keyframes textFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+      
+      .button-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn {
+        width: 100%;
+        padding: 1rem;
+      }
+      
+      footer {
+        position: static;
+        margin-top: 2rem;
+        text-align: center;
+      }
+      
+      .status-indicator {
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Dark mode toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      padding: 0.5rem;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      background: var(--glass-hover);
+    }
+
+    .theme-toggle i {
+      font-size: 1.2rem;
+      color: var(--text-light);
+    }
+
+    [data-theme="light"] {
+      --primary: #0066cc;
+      --primary-dark: #004d99;
+      --secondary: #3a78c3;
+      --bg: #f0f4f8;
+      --glass: rgba(0, 0, 0, 0.05);
+      --glass-hover: rgba(0, 0, 0, 0.1);
+      --text-light: rgba(0, 0, 0, 0.8);
+      --text-lighter: rgba(0, 0, 0, 0.6);
+    }
+
+    [data-theme="light"] video {
+      mix-blend-mode: multiply;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Theme toggle button -->
+    <button class="theme-toggle" aria-label="Toggle theme" id="themeToggle">
+      <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Status indicator -->
+    <div class="status-indicator">
+      <div class="status-dot" aria-hidden="true"></div>
+      <span>System Operational</span>
+    </div>
+
+    <div class="video-container">
+      <video autoplay muted loop playsinline>
+        <source src="https://nie.v.netease.com/nie/2021/0311/180bb6ea37a856240100f1adbcb86cf2qt.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <h1>Pairing Platform</h1>
+    
+    <p class="subtitle">Secure device pairing and connection management system</p>
+
+    <div class="button-grid">
+      <button class="btn" onclick="window.open('/pair')" aria-label="Pair Device">
+        <i class="fas fa-link"></i>
+        Pair Device
+      </button>
+      
+      <button class="btn" onclick="window.open('https://github.com/Terrizev)" aria-label="Developer Profile">
+        <i class="fab fa-github"></i>
+        Developer Profile
+      </button>
+
+      <button class="btn" onclick="window.open('https://t.me/anonymous5142')" aria-label="Telegram Chat">
+        <i class="fab fa-telegram"></i>
+        Telegram Chat
+      </button>
+
+      <button class="btn" onclick="window.open('https://whatsapp.com/channel/0029Vb57ZHh7IUYcNttXEB3y')" aria-label="WhatsApp Group">
+        <i class="fab fa-whatsapp"></i>
+        WhatsApp Channel
+      </button>
+    </div>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://www.instagram.com/anonymousxmd" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+      Terrizev Development &copy; 2025 | Secure Pairing System
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      themeIcon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+      
+      // Save preference to localStorage
+      localStorage.setItem('theme', newTheme);
+    });
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      themeIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+    }
+    
+    // Improved intersection observer for animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.btn, h1, .subtitle').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Service worker registration for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('ServiceWorker registration successful:', registration.scope);
+          })
+          .catch(error => {
+            console.log('ServiceWorker registration failed:', error);
+          });
+      });
+    }
+    
+    // Add click animation to buttons
+    document.querySelectorAll('.btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        // Create ripple effect
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        this.appendChild(ripple);
+        
+        // Position the ripple
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = `${size}px`;
+        ripple.style.left = `${e.clientX - rect.left - size/2}px`;
+        ripple.style.top = `${e.clientY - rect.top - size/2}px`;
+        
+        // Remove ripple after animation
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+  </script>
+</body>
+</html>
