@@ -76,7 +76,7 @@ router.get('/', async (req, res) => {
    ⇝ Activate your bot download zip
 
 🔧 *TECH SUPPORT:*
-   ⌬ Developer: TERRIZEV 
+   ⌬ Developer: LP
    ☎ Contact: _https://wa.me/256784670936_\nhttps://wa.me/254784937112
    ⎔ Repo: _https://github.com/Terrizev/Anonymous-md-creds.json-_
 
